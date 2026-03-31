@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "VT323", monospace;
+  --color-cyan: #00ffff;
+  --color-magenta: #ff00ff;
+}
+
+body {
+  background-color: #050505;
+  color: #00ffff;
+  font-family: var(--font-mono);
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.glitch-text {
+  position: relative;
+  text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff;
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; transform: translate(0); }
+  20% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; transform: translate(-2px, 1px); }
+  40% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; transform: translate(2px, -1px); }
+  60% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; transform: translate(-1px, 2px); }
+  80% { text-shadow: 2px 0 #ff00ff, -2px 0 #00ffff; transform: translate(1px, -2px); }
+  100% { text-shadow: -2px 0 #ff00ff, 2px 0 #00ffff; transform: translate(0); }
+}
+
+.glitch-container {
+  position: relative;
+}
+
+.glitch-container::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -2px; right: 0; bottom: 0;
+  background: rgba(255, 0, 255, 0.15);
+  z-index: -1;
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+  pointer-events: none;
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, 2px); }
+  20% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+  40% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, 2px); }
+  60% { clip-path: inset(20% 0 60% 0); transform: translate(2px, -2px); }
+  80% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 2px); }
+  100% { clip-path: inset(30% 0 50% 0); transform: translate(2px, -2px); }
+}
+
+.scanlines {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.25));
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+  pointer-events: none;
+  z-index: 49;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.95; }
+  50% { opacity: 0.85; }
+  100% { opacity: 0.95; }
+}
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+.crt-curve {
+  position: relative;
+  overflow: hidden;
+}
+.crt-curve::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+}
+
+.neon-border-cyan {
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 8px #00ffff, inset 0 0 8px #00ffff;
+}
+.neon-border-magenta {
+  border: 2px solid #ff00ff;
+  box-shadow: 0 0 8px #ff00ff, inset 0 0 8px #ff00ff;
+}
+.neon-bg-cyan {
+  background-color: #00ffff;
+  box-shadow: 0 0 10px #00ffff;
+}
+.neon-bg-magenta {
+  background-color: #ff00ff;
+  box-shadow: 0 0 10px #ff00ff;
+}
+.neon-text-cyan {
+  color: #00ffff;
+  text-shadow: 0 0 5px #00ffff;
+}
+.neon-text-magenta {
+  color: #ff00ff;
+  text-shadow: 0 0 5px #ff00ff;
+}
+
+/* Custom Range Slider */
+input[type=range] {
+  -webkit-appearance: none;
+  background: transparent;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 12px;
+  width: 12px;
+  background: #ff00ff;
+  box-shadow: 0 0 8px #ff00ff;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+  margin-top: -4px;
+}
+input[type=range]::-moz-range-thumb {
+  height: 12px;
+  width: 12px;
+  background: #ff00ff;
+  box-shadow: 0 0 8px #ff00ff;
+  cursor: pointer;
+  border: none;
+  border-radius: 0;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: rgba(0, 255, 255, 0.3);
+  border: 1px solid #00ffff;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: rgba(0, 255, 255, 0.3);
+  border: 1px solid #00ffff;
+}
